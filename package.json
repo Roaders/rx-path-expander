@@ -1,0 +1,33 @@
+{
+  "name": "node-template",
+  "version": "0.0.1",
+  "description": "A Template Node Project",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "typings": "typings install",
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "jasmine",
+    "prepublish": "typings install",
+    "prestart": "npm run build",
+    "start": "node example/example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roaders/Node-Template.git"
+  },
+  "keywords": [
+  ],
+  "author": "Giles Roadnight",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Roaders/Node-Template/issues"
+  },
+  "homepage": "https://github.com/Roaders/Node-Template#readme",
+  "devDependencies": {
+    "jasmine": "^2.5.2",
+    "typescript": "^2.1.4",
+    "typings": "^2.0.0"
+  }
+}
