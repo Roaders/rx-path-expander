@@ -21,13 +21,18 @@ export default function expandPath(
     const pathSource = pathSubject
         .merge(Rx.Observable.from<string>(pathArray));
 
-    const governor = new RateGovernor<string>(pathSource);
+    const readDirGovernor = new RateGovernor<string>(pathSource);
 
-    return governor.observable
+    const pathContentSource = readDirGovernor.observable
         .flatMap(folderPath => loadFolderContents(folderPath))
-        .do(() => governor.governRate())
-        .flatMap(folderList => Rx.Observable.from(folderList))
+        .do(() => readDirGovernor.governRate())
+        .flatMap(folderList => Rx.Observable.from(folderList));
+
+    const fileStatGovornor = new RateGovernor<string>(pathContentSource);
+
+    return fileStatGovornor.observable
         .flatMap(path => loadPathStat(path))
+        .do(() => fileStatGovornor.governRate())
         .do(stats => addNewPaths(stats, pathSubject))
         .map(stats => stats.filePath);
 }
