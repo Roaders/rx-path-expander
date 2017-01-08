@@ -1,32 +1,26 @@
 {
-  "name": "node-template",
+  "name": "rx-path-expander",
   "version": "0.0.1",
-  "description": "A Template Node Project",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "description": "Library for expanding a path to return all sub-directories and files",
   "scripts": {
     "typings": "typings install",
     "build": "tsc",
-    "pretest": "npm run build",
-    "test": "jasmine",
-    "prepublish": "typings install",
+    "prepublish": "npm run typings",
     "prestart": "npm run build",
     "start": "node example/example.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Roaders/Node-Template.git"
+    "url": "git+https://github.com/Roaders/rx-path-expander.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Giles Roadnight",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Roaders/Node-Template/issues"
+    "url": "https://github.com/Roaders/rx-path-expander/issues"
   },
-  "homepage": "https://github.com/Roaders/Node-Template#readme",
-  "devDependencies": {
-    "jasmine": "^2.5.2",
+  "homepage": "https://github.com/Roaders/rx-path-expander#readme",
+  "dependencies": {
     "typescript": "^2.1.4",
     "typings": "^2.0.0"
   }
