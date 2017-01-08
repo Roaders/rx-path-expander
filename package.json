@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Roaders/rx-path-expander#readme",
   "dependencies": {
+    "rx": "^4.1.0",
+    "rx-rate-governor": "^3.1.0",
     "typescript": "^2.1.4",
     "typings": "^2.0.0"
   }
