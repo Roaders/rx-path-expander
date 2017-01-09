@@ -2,12 +2,19 @@
   "name": "rx-path-expander",
   "version": "0.0.1",
   "description": "Library for expanding a path to return all sub-directories and files",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "bin": {
+    "expandPath": "bin/expandPath.js"
+  },
   "scripts": {
     "typings": "typings install",
     "build": "tsc",
     "prepublish": "npm run typings",
     "prestart": "npm run build",
-    "start": "node example/example.js"
+    "start": "node index.js",
+    "preexample": "npm run build",
+    "example": "node example/example.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +28,11 @@
   },
   "homepage": "https://github.com/Roaders/rx-path-expander#readme",
   "dependencies": {
+    "command-line-args": "^3.0.5",
     "rx": "^4.1.0",
-    "rx-rate-governor": "^3.1.0",
+    "rx-rate-governor": "^3.1.0"
+  },
+  "devDependencies": {
     "typescript": "^2.1.4",
     "typings": "^2.0.0"
   }

@@ -1,2 +1,2 @@
 
-export *  from "./lib/rx-path-expander";
+export * from "./lib/rx-path-expander";

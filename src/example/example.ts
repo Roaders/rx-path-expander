@@ -17,7 +17,7 @@ function filterPaths(stats: IFileStats): boolean{
     return stats.filePath.indexOf("misc") > 0;
 }
 
-const sourcePath = "\\\\Imola\\TrackDays\\Days"
+const sourcePath = "\\\\Imola\\TrackDays\\Days\\Eastern Europe 2016"
 
 console.log(`Expanding ${sourcePath}`);
 
