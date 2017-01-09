@@ -5,14 +5,14 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "bin": {
-    "expandPath": "node bin/expandPath.js"
+    "expandPath": "bin/expandPath.js"
   },
   "scripts": {
     "typings": "typings install",
     "build": "tsc",
     "prepublish": "npm run typings",
     "prestart": "npm run build",
-    "start": "node index.js",
+    "start": "node bin/expandPath.js",
     "preexample": "npm run build",
     "example": "node example/example.js"
   },
