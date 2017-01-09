@@ -40,12 +40,13 @@ export default function expandPath(
         .flatMap(path => loadPathStat(path,fileStatGovornor))
         .do(() => fileStatGovornor.governRate())
         .do(stats => addNewPaths(stats, pathSubject))
-        .map(stats => stats.filePath)
         .do(() => {
             if(readDirGovernor.complete === readDirGovernor.total && fileStatGovornor.complete === fileStatGovornor.total){
                 pathSubject.onCompleted();
             }
         })
+        .filter(stats => filter ? filter(stats) : true)
+        .map(stats => stats.filePath);
 }
 
 function addNewPaths(pathStats: IFileStats, subject: Rx.Subject<string>){
