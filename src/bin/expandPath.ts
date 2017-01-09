@@ -14,8 +14,6 @@ const {path, includeDirectories, includeFiles, filterString}: {path: string[], i
 
 const filterRegExp = filterString? new RegExp(filterString) : null;
 
-console.log("regexp: " + filterRegExp);
-
 function filter(stats: IFileStats):boolean{
     return filterRegExp ? filterRegExp.test(stats.filePath) : true;
 }

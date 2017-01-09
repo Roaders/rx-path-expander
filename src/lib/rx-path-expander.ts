@@ -19,7 +19,8 @@ export default function expandPath(
     const pathSubject = new Rx.Subject<string>();
 
     const pathSource = pathSubject
-        .merge(Rx.Observable.from<string>(pathArray));
+        .merge(Rx.Observable.from<string>(pathArray))
+        .map(folderPath => resolvePath(folderPath))
 
     function progress(){
         if(progressCallback){
@@ -47,6 +48,16 @@ export default function expandPath(
         })
         .filter(stats => filter ? filter(stats) : true)
         .map(stats => stats.filePath);
+}
+
+function resolvePath(folderPath: string): string{
+    folderPath = path.normalize(folderPath);
+
+    if(!path.isAbsolute(folderPath)){
+        folderPath = path.resolve(folderPath);
+    }
+
+    return folderPath;
 }
 
 function addNewPaths(pathStats: IFileStats, subject: Rx.Subject<string>){
