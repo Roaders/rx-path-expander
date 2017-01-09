@@ -12,7 +12,7 @@ export interface IFileStats extends fs.Stats{
 export default function expandPath(
     basePath: string | string[],
     filter?: (fileStats: IFileStats) => boolean,
-    progressCallback?: (progress: IRateGovernorInfo) => void
+    progressCallback?: (info: {readDirProgress: IRateGovernorInfo, readStatsProgress: IRateGovernorInfo}) => void
     ): Rx.Observable<string>{
     const pathArray: string[] = Array.isArray(basePath) ? basePath : [basePath];
 
@@ -22,8 +22,9 @@ export default function expandPath(
         .merge(Rx.Observable.from<string>(pathArray));
 
     function progress(){
-        //console.log(`Path ${readDirGovernor.complete}/${readDirGovernor.total} inProgress: ${readDirGovernor.inProgress} concurrent: ${readDirGovernor.concurrentCount}; Stats ${fileStatGovornor.complete}/${fileStatGovornor.total} inProgress: ${fileStatGovornor.inProgress} concurrent: ${fileStatGovornor.concurrentCount}`);
-
+        if(progressCallback){
+            progressCallback({readDirProgress: readDirGovernor, readStatsProgress: fileStatGovornor})
+        }
     }
 
     const readDirGovernor = new RateGovernor<string>(pathSource, progress);
