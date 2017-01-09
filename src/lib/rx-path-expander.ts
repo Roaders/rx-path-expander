@@ -22,7 +22,7 @@ export default function expandPath(
         .merge(Rx.Observable.from<string>(pathArray));
 
     function progress(){
-        //console.log(`Path total: ${readDirGovernor.total} complete: ${readDirGovernor.complete} inProgress: ${readDirGovernor.inProgress} concurrent: ${readDirGovernor.concurrentCount}; Stats total: ${fileStatGovornor.total} complete: ${fileStatGovornor.complete} inProgress: ${fileStatGovornor.inProgress} concurrent: ${fileStatGovornor.concurrentCount}`);
+        //console.log(`Path ${readDirGovernor.complete}/${readDirGovernor.total} inProgress: ${readDirGovernor.inProgress} concurrent: ${readDirGovernor.concurrentCount}; Stats ${fileStatGovornor.complete}/${fileStatGovornor.total} inProgress: ${fileStatGovornor.inProgress} concurrent: ${fileStatGovornor.concurrentCount}`);
 
     }
 
@@ -36,26 +36,35 @@ export default function expandPath(
     const fileStatGovornor = new RateGovernor<string>(pathContentSource, progress);
 
     return fileStatGovornor.observable
-        .flatMap(path => loadPathStat(path))
+        .flatMap(path => loadPathStat(path,fileStatGovornor))
         .do(() => fileStatGovornor.governRate())
         .do(stats => addNewPaths(stats, pathSubject))
-        .map(stats => stats.filePath);
+        .map(stats => stats.filePath)
+        .do(() => {
+            if(readDirGovernor.complete === readDirGovernor.total && fileStatGovornor.complete === fileStatGovornor.total){
+                pathSubject.onCompleted();
+            }
+        })
 }
 
 function addNewPaths(pathStats: IFileStats, subject: Rx.Subject<string>){
-    if(pathStats.isDirectory){
-        console.log(`Adding path: ${pathStats.filePath}`);
+    if(pathStats.isDirectory()){
+        //console.log(`Adding path: ${pathStats.filePath}`);
         subject.onNext(pathStats.filePath);
     }
 }
 
-function loadPathStat(path: string): Rx.Observable<IFileStats>{
+function loadPathStat(path: string, governor: RateGovernor<string>): Rx.Observable<IFileStats>{ 
     const statObservable = Rx.Observable.fromNodeCallback<fs.Stats>( fs.stat )
-    console.log(`loading path stats: ${path}`)
+    //console.log(`loading path stats: ${path}`)
 
     return statObservable(path)
-        .catch(() => Rx.Observable.empty())
-        .do(() => console.log(`loading path stats: ${path} COMPLETE`))
+        .catch(error => {
+            //console.log(`stat Error loading ${path}: ${error}`);
+            governor.governRate()
+            return Rx.Observable.empty(); 
+        })
+        //.do(() => console.log(`loading path stats: ${path} COMPLETE`))
         .map(stats => {
             const fileInfo = stats as IFileStats;
             fileInfo.filePath = path;
@@ -65,11 +74,14 @@ function loadPathStat(path: string): Rx.Observable<IFileStats>{
 }
 
 function loadFolderContents(folder: string): Rx.Observable<string[]>{
-    console.log(`loading path content: ${folder}`)
+    //console.log(`loading path content: ${folder}`)
     const readDirObservable = Rx.Observable.fromNodeCallback<string[]>( fs.readdir )
 
     return readDirObservable(folder)
-        .catch(() => Rx.Observable.empty())
-        .do(folderContents => console.log(`loading path content: ${folder} COMPLETE - ${folderContents}`))
+        .catch(error => {
+            //console.log(`readdir error loading ${folder}: ${error}`);
+            return Rx.Observable.just([]);
+        })
+        //.do(folderContents => console.log(`loading path content: ${folder} COMPLETE - ${folderContents}`))
         .map(folderContents => folderContents.map( filepath => path.join(folder, filepath)));
 }
