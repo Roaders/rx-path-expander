@@ -1,28 +1,58 @@
-# Node-Template
+# rx-path-expander
 
-Template repo for starting node TS projects
+Library for expanding a path to return all sub-directories and files
 
-## Installation
+## Usage
 
-`npm install --save Node-Template`
+### From Command Line
 
-## Tests
+You can use `path-extender` from the command line but installing as a global package:
 
-Tests can be run as follows:
+`npm install -g rx-path-expander`
+
+You can then list all files in a relative:
+
+`expandPath --path node_modules --filterString ".js"`
+
+to show all `js` files in the `node_modules` folder
+
+`expandPath -p E:\ -p C:\`
+
+to list all folders in the `C:` and `E:` drives.
+
+Use `expandPath -h` for a full list of options
+
+### In Node Project
+
+You can use path extender in a node project to expand paths:
+
+`npm install --save rx-path-expander`
+
+In your code:
 
 ```
-git clone https://github.com/Roaders/Node-Template.git
-cd Node-Template
-npm install
-npm test
+var expandPath, {IIFileStats} = require("../lib/rx-path-expander");
+var {IRateGovernorInfo} = require("rx-rate-governor");
+
+function handleProgress(progressInfo: {readDirProgress: IRateGovernorInfo, readStatsProgress: IRateGovernorInfo}){
+    //display progress
+}
+
+filterFunction(stats: IIFileStats): boolean{
+    return stats.isFile() && stats.filePath.indexOf("jpg") > 0;
+}
+
+expandPath(["pathOne","pathTwo"],filterFunction,handleProgress)
+    .subscribe(path => doSomethingWithPath());
+
 ```
 
 ## Example
 An example can be run as follows:
 
 ```
-git clone https://github.com/Roaders/Node-Template.git
+git clone https://github.com/Roaders/rx-path-expander.git
 cd Node-Template
 npm install
-npm start
+npm run example
 ```

@@ -1,8 +1,5 @@
 {
   "globalDependencies": {
     "node": "registry:dt/node#6.0.0+20161121110008"
-  },
-  "dependencies": {
-    "command-line-args": "registry:npm/command-line-args#3.0.2+20161102220831"
   }
 }
