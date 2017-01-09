@@ -5,7 +5,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "bin": {
-    "expandPath": "bin/expandPath.js"
+    "expandPath": "node bin/expandPath.js"
   },
   "scripts": {
     "typings": "typings install",
