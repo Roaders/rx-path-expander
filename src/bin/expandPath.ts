@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 import * as commandLineArgs from "command-line-args";
 import expandPath, {IFileStats} from "../lib/rx-path-expander";
