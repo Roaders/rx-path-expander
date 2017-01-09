@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 var commandLineArgs = require("command-line-args");
 var rx_path_expander_1 = require("../lib/rx-path-expander");
