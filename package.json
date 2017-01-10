@@ -29,6 +29,7 @@
   "dependencies": {
     "command-line-args": "^3.0.5",
     "command-line-usage": "^3.0.8",
+    "filesize": "^3.3.0",
     "rx": "^4.1.0",
     "rx-rate-governor": "^3.1.0"
   },

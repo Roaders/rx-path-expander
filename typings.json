@@ -1,5 +1,8 @@
 {
   "globalDependencies": {
     "node": "registry:dt/node#6.0.0+20161121110008"
+  },
+  "dependencies": {
+    "filesize": "registry:dt/filesize#3.2.1+20160620211513"
   }
 }
