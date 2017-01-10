@@ -2,6 +2,8 @@
 import expandPath, {IFileStats} from "../lib/rx-path-expander";
 import {IRateGovernorInfo} from "rx-rate-governor"
 
+import os = require('os');
+
 var start = new Date().getTime();
 
 function handleProgress({readDirProgress, readStatsProgress}: {readDirProgress: IRateGovernorInfo, readStatsProgress: IRateGovernorInfo}){
@@ -18,11 +20,12 @@ function filterPaths(stats: IFileStats): boolean{
 }
 
 //const sourcePath = "\\\\Imola\\TrackDays\\Days\\Eastern Europe 2016"
-const sourcePath = "C:\\";
+const sourcePath = os.homedir();
 
 console.log(`Expanding ${sourcePath}`);
 
 expandPath([sourcePath], undefined, handleProgress)
+    .map(stats => stats.filePath)
     .do(result => console.log(`Result: ${result}`))
     .count()
     .subscribe(
