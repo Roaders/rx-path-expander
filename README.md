@@ -52,7 +52,7 @@ An example can be run as follows:
 
 ```
 git clone https://github.com/Roaders/rx-path-expander.git
-cd Node-Template
+cd rx-path-expander
 npm install
 npm run example
 ```
