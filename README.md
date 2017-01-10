@@ -22,6 +22,22 @@ to list all folders in the `C:` and `E:` drives.
 
 Use `expandPath -h` for a full list of options
 
+#### Example Output
+
+```
+roaders@localhost:~/dev/rx-path-expander$ expandPath -p src
+/home/roaders/dev/rx-path-expander/src/bin
+/home/roaders/dev/rx-path-expander/src/example
+/home/roaders/dev/rx-path-expander/src/index.ts
+/home/roaders/dev/rx-path-expander/src/lib
+/home/roaders/dev/rx-path-expander/src/bin/expandPath.ts
+/home/roaders/dev/rx-path-expander/src/example/example.ts
+/home/roaders/dev/rx-path-expander/src/lib/rx-path-expander.ts
+7 paths
+Complete
+
+```
+
 ### In Node Project
 
 You can use path extender in a node project to expand paths:

@@ -13,7 +13,8 @@ export default function expandPath(
     basePath: string | string[],
     filter?: (fileStats: IFileStats) => boolean,
     progressCallback?: (info: {readDirProgress: IRateGovernorInfo, readStatsProgress: IRateGovernorInfo}) => void
-    ): Rx.Observable<string>{
+    ): Rx.Observable<IFileStats>{
+
     const pathArray: string[] = Array.isArray(basePath) ? basePath : [basePath];
 
     const pathSubject = new Rx.Subject<string>();
@@ -46,8 +47,7 @@ export default function expandPath(
                 pathSubject.onCompleted();
             }
         })
-        .filter(stats => filter ? filter(stats) : true)
-        .map(stats => stats.filePath);
+        .filter(stats => filter ? filter(stats) : true);
 }
 
 function resolvePath(folderPath: string): string{

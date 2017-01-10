@@ -76,6 +76,7 @@ function filter(stats: IFileStats):boolean{
 }
 
 expandPath(path, filter)
+    .map(stats => stats.filePath)
     .do(path => console.log(path))
     .count()
     .subscribe(
