@@ -1,6 +1,6 @@
 {
   "name": "rx-path-expander",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Library for expanding a path to return all sub-directories and files",
   "main": "index.js",
   "typings": "index.d.ts",
