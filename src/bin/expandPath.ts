@@ -2,6 +2,7 @@
 
 import * as commandLineArgs from "command-line-args";
 import * as commandLineUsage from "command-line-usage";
+import * as filesize from "filesize"
 import expandPath, {IFileStats} from "../lib/rx-path-expander";
 
 const argumentDefinitions: commandLineArgs.ArgsOptions[] = [
@@ -48,8 +49,6 @@ const sections = [
     }
 ];
 
-
-
 const {path, excludeDirectories, excludeFiles, filterString, help}: {path: string[], excludeDirectories: boolean, excludeFiles: boolean, filterString: string, help: boolean} = commandLineArgs(argumentDefinitions);
 
 if(help){
@@ -76,11 +75,17 @@ function filter(stats: IFileStats):boolean{
 }
 
 expandPath(path, filter)
-    .map(stats => stats.filePath)
-    .do(path => console.log(path))
-    .count()
+    .scan((acc, stats) => {
+        acc.count++;
+        acc.totalSize += stats.size;
+        acc.currentPath = stats.filePath;
+
+        return acc;
+    }, {count: 0, totalSize: 0, currentPath: ""})
+    .do(acc => console.log(`${acc.currentPath} (${acc.count} files ${filesize(acc.totalSize)})`))
+    .last()
     .subscribe(
-        count => console.log(`${count} paths`),
+        acc => console.log(`${acc.count} paths ${filesize(acc.totalSize)}`),
         error => console.log(`Error: ${error}`),
         () => console.log(`Complete`)
     );
