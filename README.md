@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/roaders/rx-path-expander/badge.svg)](https://snyk.io/test/github/roaders/rx-path-expander)
+
 # rx-path-expander
 
 Library for expanding a path to return all sub-directories and files
