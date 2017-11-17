@@ -2,6 +2,8 @@
 
 # rx-path-expander
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Roaders/rx-path-expander.svg)](https://greenkeeper.io/)
+
 Library for expanding a path to return all sub-directories and files
 
 ## Usage
