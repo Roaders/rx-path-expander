@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-import * as commandLineArgs from "command-line-args";
+import {OptionDefinition} from "command-line-args";
+import * as commandLineArgs from "command-line-args"
 import * as commandLineUsage from "command-line-usage";
 import * as filesize from "filesize"
 import expandPath, {IFileStats} from "../lib/rx-path-expander";
 
-const argumentDefinitions: commandLineArgs.ArgsOptions[] = [
+
+const argumentDefinitions: OptionDefinition[] = [
     {
         name: "path", 
         description: "Required. Path to expand. Can be absolute or relative",

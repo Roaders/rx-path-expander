@@ -8,9 +8,7 @@
     "expandPath": "bin/expandPath.js"
   },
   "scripts": {
-    "typings": "typings install",
     "build": "tsc",
-    "prepublish": "npm run typings",
     "prestart": "npm run build",
     "preexample": "npm run build",
     "example": "node example/example.js"
@@ -27,6 +25,8 @@
   },
   "homepage": "https://github.com/Roaders/rx-path-expander#readme",
   "dependencies": {
+    "@types/command-line-args": "^4.0.2",
+    "@types/node": "^8.0.53",
     "command-line-args": "^3.0.5",
     "command-line-usage": "^4.0.0",
     "filesize": "^3.5.4",
