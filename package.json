@@ -27,7 +27,7 @@
   "dependencies": {
     "@types/command-line-args": "^4.0.2",
     "@types/node": "^8.0.53",
-    "command-line-args": "^4.0.2",
+    "command-line-args": "^5.0.1",
     "command-line-usage": "^4.0.0",
     "filesize": "^3.5.11",
     "rx": "^4.1.0",
