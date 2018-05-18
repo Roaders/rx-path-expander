@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/Roaders/rx-path-expander#readme",
   "dependencies": {
-    "@types/command-line-args": "^4.0.2",
+    "@types/command-line-args": "^5.0.0",
     "@types/node": "^8.0.53",
     "command-line-args": "^4.0.2",
     "command-line-usage": "^4.0.0",
