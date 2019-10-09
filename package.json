@@ -29,7 +29,7 @@
     "@types/node": "^8.0.53",
     "command-line-args": "^4.0.2",
     "command-line-usage": "^4.0.0",
-    "filesize": "^3.5.11",
+    "filesize": "^5.0.3",
     "rx": "^4.1.0",
     "rx-rate-governor": "^3.1.1"
   },
